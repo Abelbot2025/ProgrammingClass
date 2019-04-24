@@ -13,13 +13,14 @@ namespace GangestersInTheDungeon
     {
         private Rectangle hitbox;
         private Texture2D texture;
+        public bool isTrue;
         public TitleScreen()
         {
             hitbox = new Rectangle(0, 0, 900, 600);
         }
-        public void LoadContnent(ContentManager content)
+        public void LoadContnent(ContentManager content, string Texture)
         {
-            texture = content.Load<Texture2D>("Title");
+           texture = content.Load<Texture2D>(Texture);
         }
         public void Draw(SpriteBatch spriteBatch)
         {
