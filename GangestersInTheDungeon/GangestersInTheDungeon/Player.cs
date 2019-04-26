@@ -44,13 +44,13 @@ namespace GangestersInTheDungeon
             {
                 right = true;
                 left = false;
-                hitbox.X+=speed;
+                move(platform, speed, 0);
             }
             if (ks.IsKeyDown(Keys.A))
             {
                 left = true;
                 right = false;
-                hitbox.X += -speed;  
+                move(platform, -speed, 0); 
             }
             if (ks.IsKeyDown(Keys.W))
             {
@@ -59,6 +59,54 @@ namespace GangestersInTheDungeon
           if (ks.IsKeyDown(Keys.S))
             {
                 hitbox.Y += speed;
+            }
+
+           
+        }
+        private void move(List<Platform> platform, int xVal, int yVal)
+        {
+            int xMag = xVal;
+            int yMag = yVal;
+            int xDir = 1;
+            int yDir = 1;
+            if (xVal < 0)
+            {
+                xMag = -1 * xVal;
+                xDir = -1;
+            }
+            if (xVal < 0)
+            {
+                yMag = -1 * yVal;
+                yDir = -1;
+            }
+            for (int x = 0; x < xMag; x++)
+            {
+                bool collide = false;
+                for (int i = 0; i < platform.Count; i++)
+                {
+                    if (!hitbox.Intersects(platform[i].hitbox))
+                    {
+                        hitbox.X = hitbox.X + xDir; //fixme
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            for (int y = 0; y < xMag; y++)
+            {
+                for (int i = 0; i < platform.Count; i++)
+                {
+                    if (!hitbox.Intersects(platform[i].hitbox))
+                    {
+                        hitbox.Y = hitbox.Y + yDir;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
         }
         public void Draw(SpriteBatch spriteBatch)
