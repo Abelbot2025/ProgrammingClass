@@ -54,11 +54,11 @@ namespace GangestersInTheDungeon
             }
             if (ks.IsKeyDown(Keys.W))
             {
-                hitbox.Y += -speed;
+                move(platform, speed, 0);
             }
           if (ks.IsKeyDown(Keys.S))
             {
-                hitbox.Y += speed;
+                move(platform, -speed, 0);
             }
 
            
@@ -81,31 +81,29 @@ namespace GangestersInTheDungeon
             }
             for (int x = 0; x < xMag; x++)
             {
+                hitbox.X = hitbox.X + xDir;
                 bool collide = false;
                 for (int i = 0; i < platform.Count; i++)
                 {
-                    if (!hitbox.Intersects(platform[i].hitbox))
+                    if (hitbox.Intersects(platform[i].hitbox))
                     {
-                        hitbox.X = hitbox.X + xDir; //fixme
-                    }
-                    else
-                    {
+                        hitbox.X = hitbox.X -xDir; 
                         break;
                     }
+                   
                 }
             }
-            for (int y = 0; y < xMag; y++)
+            for (int y = 0; y < yMag; y++)
             {
+                hitbox.Y = hitbox.Y + yDir;
                 for (int i = 0; i < platform.Count; i++)
                 {
-                    if (!hitbox.Intersects(platform[i].hitbox))
+                    if (hitbox.Intersects(platform[i].hitbox))
                     {
-                        hitbox.Y = hitbox.Y + yDir;
-                    }
-                    else
-                    {
+                        hitbox.Y = hitbox.Y - yDir;
                         break;
                     }
+                
                 }
             }
         }
