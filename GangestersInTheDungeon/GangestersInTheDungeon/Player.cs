@@ -29,7 +29,7 @@ namespace GangestersInTheDungeon
             right = true;
             speed = 4;
             health = 10;
-            hitbox = new Rectangle(50, 450, 100, 100);
+            hitbox = new Rectangle(50, 500, 100, 100);
         }
         public void LoadContent(ContentManager content)
         {
@@ -52,16 +52,15 @@ namespace GangestersInTheDungeon
                 right = false;
                 move(platform, -speed, 0); 
             }
-            if (ks.IsKeyDown(Keys.W))
+            if (ks.IsKeyDown(Keys.W) && canJump == true)
             {
-                move(platform, speed, 0);
+                canJump = false;
+                velocity.Y += -10;
+                
             }
-          if (ks.IsKeyDown(Keys.S))
-            {
-                move(platform, -speed, 0);
-            }
-
-           
+   
+            velocity.Y += .5f;
+            move(platform, 0, (int)velocity.Y);
         }
         private void move(List<Platform> platform, int xVal, int yVal)
         {
@@ -74,7 +73,7 @@ namespace GangestersInTheDungeon
                 xMag = -1 * xVal;
                 xDir = -1;
             }
-            if (xVal < 0)
+            if (yVal < 0)
             {
                 yMag = -1 * yVal;
                 yDir = -1;
@@ -101,6 +100,8 @@ namespace GangestersInTheDungeon
                     if (hitbox.Intersects(platform[i].hitbox))
                     {
                         hitbox.Y = hitbox.Y - yDir;
+                        canJump = true;
+                        velocity.Y = 0;
                         break;
                     }
                 

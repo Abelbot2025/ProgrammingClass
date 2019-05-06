@@ -46,7 +46,8 @@ namespace GangestersInTheDungeon
             }
             else if (firstLevel.isTrue == true)
             {
-                AddPlatform(50, 550, 450, 20);
+                AddPlatform(250, 550, 450, 5);
+                AddPlatform(0,600, 1000, 1);
                 player.Update(platforms);
             }
             base.Update(gameTime);
