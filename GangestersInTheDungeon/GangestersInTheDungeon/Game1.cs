@@ -14,6 +14,7 @@ namespace GangestersInTheDungeon
         List<Platform> platforms = new List<Platform>();
         public static Texture2D platformTexture;
         Player player = new Player();
+        public static Texture2D goldBar;
 
         public Game1()
         {
@@ -32,6 +33,7 @@ namespace GangestersInTheDungeon
             player.LoadContent(Content);
 
             platformTexture = Content.Load<Texture2D>("Platform");
+            goldBar = Content.Load<Texture2D>("gold bar");
         }
         protected override void Update(GameTime gameTime)
         {
@@ -46,8 +48,11 @@ namespace GangestersInTheDungeon
             }
             else if (firstLevel.isTrue == true)
             {
-                AddPlatform(250, 550, 450, 5);
+                AddPlatform(500, 565, 450, 5);
                 AddPlatform(0,600, 1000, 1);
+                AddPlatform(0, 450, 450, 5);
+                AddPlatform(0, 315, 400, 5);
+                AddPlatform(450, 200, 450, 5);
                 player.Update(platforms);
             }
             base.Update(gameTime);

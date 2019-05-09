@@ -59,7 +59,7 @@ namespace GangestersInTheDungeon
                 
             }
    
-            velocity.Y += .5f;
+            velocity.Y += .3f;
             move(platform, 0, (int)velocity.Y);
         }
         private void move(List<Platform> platform, int xVal, int yVal)
